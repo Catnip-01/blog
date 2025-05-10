@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+//import React, { useState } from 'react';
 import BlogCard from './components/blogcard';
+
+//import React, { useState } from 'react';
+
+
 
 function App() {
 
-  const [aosState, setAosState] = useState("flip-left");
+  //const [aosState, setAosState] = useState("flip-left");
 
   return (
     <div className="flex bg-black justify-center items-center w-full">
