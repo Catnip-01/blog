@@ -46,7 +46,7 @@ const CreateBlogForm: React.FC = () => {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:5000/newBlog', {
+      const response = await fetch('https://blog-3-68mp.onrender.com/newBlog', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

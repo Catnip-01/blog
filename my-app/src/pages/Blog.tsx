@@ -23,7 +23,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await fetch('http://localhost:5000/blogs'); // change URL as needed
+        const res = await fetch('https://blog-3-68mp.onrender.com/blogs'); // change URL as needed
         const data = await res.json();
         
         const blogsWithCommentsCount = data.map((blog: any) => ({

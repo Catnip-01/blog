@@ -20,7 +20,7 @@ const BlogDetail = () => {
   useEffect(() => {
     if (!title) return;
 
-    fetch(`http://localhost:5000/blogs/title/${encodeURIComponent(title)}`)
+    fetch(`https://blog-3-68mp.onrender.com/blogs/title/${encodeURIComponent(title)}`)
       .then((res) => {
         if (!res.ok) throw new Error("Blog not found");
         return res.json();

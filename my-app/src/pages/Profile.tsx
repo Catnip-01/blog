@@ -41,7 +41,7 @@ const Profile = () => {
     if (!loggedInUser) {
       navigate("/login");
     } else {
-      fetch(`http://localhost:5000/profile?username=${loggedInUser}`)
+      fetch(`https://blog-3-68mp.onrender.com/profile?username=${loggedInUser}`)
         .then((res) => res.json())
         .then((data) => setProfile(data))
         .catch(() => setMessage("Error loading profile"));
@@ -49,7 +49,7 @@ const Profile = () => {
   }, [loggedInUser, navigate]);
 
   const handleUpdate = async () => {
-    const response = await fetch("http://localhost:5000/profile", {
+    const response = await fetch("https://blog-3-68mp.onrender.com/profile", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -74,7 +74,7 @@ const Profile = () => {
   };
 
   const fetchBlogs = async () => {
-    const res = await fetch(`http://localhost:5000/newBlog?author=${loggedInUser}`);
+    const res = await fetch(`https://blog-3-68mp.onrender.com/newBlog?author=${loggedInUser}`);
     const data = await res.json();
     setBlogs(data);
   };

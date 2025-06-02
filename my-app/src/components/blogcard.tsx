@@ -29,7 +29,7 @@ export default function BlogCard({ title, description,  initialComments = [] }: 
     if (loadingLike) return;
     setLoadingLike(true);
     try {
-        const response = await axios.post(`http://localhost:5000/blogs/${encodeURIComponent(title)}/like`);
+        const response = await axios.post(`https://blog-3-68mp.onrender.com/blogs/${encodeURIComponent(title)}/like`);
         console.log("Like response:", response.data);
         setLikes(response.data.likes);
     } catch (error) {
@@ -49,7 +49,7 @@ const handleCommentPost = async () => {
   setLoadingComment(true);
 
   try {
-    const response = await axios.post(`http://localhost:5000/blogs/${encodeURIComponent(title)}/comment`, {
+    const response = await axios.post(`https://blog-3-68mp.onrender.com/blogs/${encodeURIComponent(title)}/comment`, {
       // Remove author field here:
       text: commentInput.trim(),
     });
