@@ -45,7 +45,7 @@ const Blog = () => {
       <Header />
       <main className="pt-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex flex-row justify-between">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center">All Posts</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center">All new posts</h1>
           <Link to="/newblog">
             <button className="p-3 bg-neutral border border-white text-white cursor-pointer">
               NewBlog
