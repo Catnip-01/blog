@@ -30,7 +30,7 @@ const Header: React.FC = () => {
         <div className="max-w-screen-xl mx-auto flex items-center justify-between relative">
             {/* Centered Title */}
             <h1 className="text-2xl font-bold">
-            <Link to="/" className="hover:text-gray-300">LinkedRIT</Link>
+            <Link to="/" className="hover:text-gray-300">placeholder</Link>
             </h1>
             </div>
 
