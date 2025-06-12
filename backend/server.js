@@ -49,7 +49,7 @@ const Blog = mongoose.model("Blog", blogSchema);
 const User = mongoose.model("User", userSchema);
 
 app.post("/testpost", (req, res) => {
-  res.status(200).send("Test POST endpoint reached!");
+  res.status(200).send("demo!");
 });
 
 // Test MongoDB connection
