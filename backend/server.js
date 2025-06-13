@@ -56,7 +56,7 @@ app.post("/testpost", (req, res) => {
 app.get("/test-mongo", async (req, res) => {
   try {
     await mongoose.connection.db.admin().ping();
-    res.send("MongoDB connection successful! and working");
+    res.send("MongoDB connection successful and changes made now");
   } catch (err) {
     res.status(500).send("MongoDB connection failed.");
   }
