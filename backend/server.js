@@ -71,7 +71,7 @@ app.post("/signup", async (req, res) => {
     if (existing) return res.status(400).json("User already exists");
     const newUser = new User({ username, password });
     await newUser.save();
-    res.json({message: "User registered successfully!", redirectTo:"/login"});
+    res.json({message: "User registered successfully!", redirectTo:"/"});
     // res.redirect("/login");
   } catch (err) {
     res.status(500).send("Error registering user.");
