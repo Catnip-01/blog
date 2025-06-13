@@ -41,7 +41,7 @@ const Profile = () => {
     if (!loggedInUser) {
       navigate("/login");
     } else {
-      fetch(`https://blog-3-68mp.onrender.com/profile?username=${loggedInUser}`)
+      fetch(`https://blog-4-sb3k.onrender.com/profile?username=${loggedInUser}`)
         .then((res) => res.json())
         .then((data) => setProfile(data))
         .catch(() => setMessage("Error loading profile"));
@@ -74,7 +74,7 @@ const Profile = () => {
   };
 
   const fetchBlogs = async () => {
-    const res = await fetch(`https://blog-3-68mp.onrender.com/newBlog?author=${loggedInUser}`);
+    const res = await fetch(`https://blog-4-sb3k.onrender.com/newBlog?author=${loggedInUser}`);
     const data = await res.json();
     setBlogs(data);
   };
