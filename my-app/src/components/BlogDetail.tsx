@@ -1,6 +1,6 @@
-import  { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import Header from '../components/header'; 
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import Header from "../components/header";
 
 interface Blog {
   _id: string;
@@ -16,6 +16,7 @@ const BlogDetail = () => {
   const { title } = useParams<{ title: string }>();
   const [blog, setBlog] = useState<Blog | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!title) return;
@@ -35,6 +36,28 @@ const BlogDetail = () => {
       });
   }, [title]);
 
+  const handleDelete = async () => {
+    const confirm = window.confirm("Are you sure you want to delete this blog?");
+    if (!confirm || !title) return;
+
+    try {
+      const response = await fetch(
+        `https://blog-4-sb3k.onrender.com/blogs/title/${encodeURIComponent(title)}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to delete blog");
+
+      alert("Blog deleted successfully.");
+      navigate("/"); // Redirect to home or another page
+    } catch (err) {
+      console.error(err);
+      alert("An error occurred while deleting the blog.");
+    }
+  };
+
   if (error)
     return (
       <div className="min-h-screen flex flex-col bg-black">
@@ -44,6 +67,7 @@ const BlogDetail = () => {
         </div>
       </div>
     );
+
   if (!blog)
     return (
       <div className="min-h-screen flex flex-col bg-black">
@@ -54,39 +78,48 @@ const BlogDetail = () => {
       </div>
     );
 
-return (
-  <div className="min-h-screen flex flex-col bg-black px-4 py-8">
-    <Header />
-    {/* Container to take all remaining space below header */}
-    <div className="flex-grow flex justify-center items-start">
-      <div
-        className="max-w-3xl w-full bg-gray-800 shadow-lg rounded-lg p-10 text-gray-300 font-sans"
-        style={{ minHeight: 'calc(100vh - 4rem)' }} // adjust 4rem if header height is different
-      >
-        <h1 className="text-5xl font-bold mb-6 text-gray-100">{blog.title}</h1>
-        <p className="italic mb-8 border-l-4 border-gray-600 pl-4 text-gray-400">
-          {blog.description}
-        </p>
-        {blog.imageUrl && (
-          <img
-            src={blog.imageUrl}
-            alt={blog.title}
-            className="w-full max-h-96 object-cover rounded-md mb-8 shadow-md"
-          />
-        )}
-        <div className="text-lg leading-relaxed text-gray-300 space-y-6">
-          {blog.content.split("\n").map((para, idx) => (
-            <p key={idx}>{para}</p>
-          ))}
-        </div>
-        <div className="mt-12 pt-6 border-t border-gray-700 flex justify-between text-gray-400 text-lg font-semibold">
-          <span>Published on: {new Date(blog.createdAt || "").toLocaleDateString()}</span>
-          <span className="italic">Author: {blog.author}</span>
+  return (
+    <div className="min-h-screen flex flex-col bg-black px-4 py-8">
+      <Header />
+      <div className="flex-grow flex justify-center items-start">
+        <div
+          className="max-w-3xl w-full bg-gray-800 shadow-lg rounded-lg p-10 text-gray-300 font-sans"
+          style={{ minHeight: "calc(100vh - 4rem)" }}
+        >
+          <h1 className="text-5xl font-bold mb-6 text-gray-100">{blog.title}</h1>
+          <p className="italic mb-8 border-l-4 border-gray-600 pl-4 text-gray-400">
+            {blog.description}
+          </p>
+          {blog.imageUrl && (
+            <img
+              src={blog.imageUrl}
+              alt={blog.title}
+              className="w-full max-h-96 object-cover rounded-md mb-8 shadow-md"
+            />
+          )}
+          <div className="text-lg leading-relaxed text-gray-300 space-y-6">
+            {blog.content.split("\n").map((para, idx) => (
+              <p key={idx}>{para}</p>
+            ))}
+          </div>
+          <div className="mt-12 pt-6 border-t border-gray-700 flex justify-between items-center text-gray-400 text-lg font-semibold">
+            <span>Published on: {new Date(blog.createdAt || "").toLocaleDateString()}</span>
+            <span className="italic">Author: {blog.author}</span>
+          </div>
+
+          {/* Delete Button */}
+          <div className="mt-8 flex justify-end">
+            <button
+              onClick={handleDelete}
+              className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded shadow-md transition duration-200 font-semibold"
+            >
+              Delete Blog
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default BlogDetail;
