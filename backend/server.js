@@ -93,6 +93,22 @@ app.post("/login", async (req, res) => {
   }
 });
 
+//delete route set up
+app.delete("/blogs/title/:title", async (req, res) => {
+  try {
+    const deletedBlog = await Blog.findOneAndDelete({ title: req.params.title });
+    if (!deletedBlog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    res.status(200).json({ message: "Blog deleted successfully" });
+  } catch (err) {
+    console.error("Error deleting blog:", err);
+    res.status(500).json({ message: "Failed to delete blog" });
+  }
+});
+
+
 // Get user profile (expects username from query)
 app.get("/profile", async (req, res) => {
   const { username } = req.query;
